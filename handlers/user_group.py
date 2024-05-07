@@ -5,7 +5,7 @@ from aiogram.filters import CommandStart, Command, StateFilter, or_f
 from sqlalchemy.ext.asyncio import AsyncSession
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-from aiogram.methods.get_chat_member import GetChatMember
+
 
 #from app import BOTNAME
 from filters.chat_types import ChatTypeFilter

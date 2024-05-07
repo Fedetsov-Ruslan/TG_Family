@@ -19,7 +19,7 @@ def go_to_privat_btns(
         chat_id= int):
     sizes = (1,)
     keyboard = InlineKeyboardBuilder()
-    keyboard.add(InlineKeyboardButton(text='Начать', url=f'https://t.me/{url}?start=start_{chat_id}'))
+    keyboard.add(InlineKeyboardButton(text='Начать', url=f'https://t.me/{url}?start=group_{chat_id}'))
     return keyboard.adjust(*sizes).as_markup()
 
 def get_callback_btns(

@@ -40,26 +40,17 @@ wish ={
     'cook':'хочу покушать',
 }
 
-@user_private_router.callback_query(F.data.startswith('start_'))
-async def  start_callback(callback:types.CallbackQuery, state: FSMContext):
-    chat_id = callback.data.split('_')[1]
-    await state.update_data(group_chat_id=chat_id)
-    print(chat_id)
-    await callback.answer(
-        'Чьи пожелания хотели бы посмотреть?',
-        reply_markup=get_callback_btns(btns={
-            'Мои': 'my',
-            'Моей половинки': 'not_my'
-        }),
-    )
-    await state.set_state(AddIvent.choose_user)
 
 @user_private_router.message(or_f(CommandStart()))  
 async def start_cmd( callback:types.CallbackQuery, state: FSMContext, session: AsyncSession):
-    #if callback.data.isdigit():
-    await state.update_data(group_chat_id=-4118368981) # -4118368981)#int(callback.data)
-    user_id = callback.from_user.id
+   
+    if (len(callback.text.split('_'))>1):
+        await state.update_data(group_chat_id=int(callback.text.split('_')[1])) # -4118368981
+    #else:
+    #    data = await state.get_data()
+    #    print(data['group_chat_id'])
     
+    print('qwerty')
     await callback.answer( 'Чьи пожелания хотели бы посмотреть?',
         reply_markup=get_callback_btns(btns={
             'Мои': 'my',
