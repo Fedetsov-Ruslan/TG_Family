@@ -29,9 +29,7 @@ async def main():
     dp.startup.register(on_startup)
     dp.update.middleware(DataBaseSession(session_poll=session_maker))
     await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
-    await bot.set_my_commands(commands=group, scope=types.BotCommandScopeAllGroupChats())
-    #me = await bot.get_me()
-    #BOTNAME = me.username    #имя бота
+    await bot.set_my_commands(commands=group, scope=types.BotCommandScopeAllGroupChats())    
     #await bot.delete_my_commands(scope=types.BotCommandScopeAllPrivateChats()) #удалить кноку меню
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
 

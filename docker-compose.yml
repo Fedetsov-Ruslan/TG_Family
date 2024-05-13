@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    container_name: family_bot
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://family_bot:11235813@localhost:5432/family_bot
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:16
+    container_name: db_family_bot
+    environment:
+      POSTGRES_DB: family_bot
+      POSTGRES_USER: family_bot 
+      POSTGRES_PASSWORD: 11235813
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: {}

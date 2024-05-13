@@ -46,11 +46,6 @@ async def start_cmd( callback:types.CallbackQuery, state: FSMContext, session: A
    
     if (len(callback.text.split('_'))>1):
         await state.update_data(group_chat_id=int(callback.text.split('_')[1])) # -4118368981
-    #else:
-    #    data = await state.get_data()
-    #    print(data['group_chat_id'])
-    
-    print('qwerty')
     await callback.answer( 'Чьи пожелания хотели бы посмотреть?',
         reply_markup=get_callback_btns(btns={
             'Мои': 'my',
