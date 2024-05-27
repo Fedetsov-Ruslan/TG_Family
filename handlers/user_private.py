@@ -41,7 +41,7 @@ wish ={
 }
 
 
-@user_private_router.message(or_f(CommandStart()))  
+@user_private_router.message(CommandStart())  
 async def start_cmd( callback:types.CallbackQuery, state: FSMContext, session: AsyncSession):
    
     if (len(callback.text.split('_'))>1):
@@ -212,7 +212,10 @@ async def get_record(callback: types.CallbackQuery, session: AsyncSession, state
     records = await orm_get(session,  data, user_id, chat_id)
     list_record = [f'{record.value}, создана {str(record.created).split()[0]}' for record in records]
     str_record = '\n'.join(list_record)
-    await callback.message.edit_text( f'Вот список: {str_record}')
+    if str_record: 
+        await callback.message.edit_text( f'Вот список: {str_record}')
+    else:
+        await callback.message.edit_text('Список пуст')
     await callback.message.answer('Чьи записи хотите посмотреть?',
         reply_markup=get_callback_btns(btns={
             'Мои': 'my',
@@ -232,7 +235,10 @@ async def get_all(callback:types.CallbackQuery, session: AsyncSession, state: FS
     records = await orm_get_all(session, data, user_id, chat_id)
     list_record = [f'Категория: {wish[record.category]}, подкатегория: {wish[record.sub_category]} - {record.value}, создана {str(record.created).split()[0]}' for record in records]
     str_record = '\n'.join(list_record) 
-    await callback.message.edit_text( f'Вот список: {str_record}')
+    if str_record:
+        await callback.message.edit_text( f'Вот список: {str_record}')
+    else:
+        await callback.message.edit_text('Список пуст')
     await callback.message.answer('Чьи записи вы хотите посмотреть?',
         reply_markup=get_callback_btns(btns={
             'Мои': 'my',

@@ -5,14 +5,16 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://family_bot:11235813@localhost:5432/family_bot
+      - API_TOKEN=7039079332:AAEEIunpYq1CZCO34EOBOG6R03EdApQi_2w
+
+      - DATABASE_URL=postgresql+asyncpg://family_bot:11235813@db:5432/family_bot
     ports:
-      - "8000:8000"
+      - "55582:55582"
     volumes:
       - .:/app
 
   db:
-    image: postgres:16
+    image: postgres
     container_name: db_family_bot
     environment:
       POSTGRES_DB: family_bot
@@ -22,6 +24,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
 
 volumes:
   postgres_data: {}
