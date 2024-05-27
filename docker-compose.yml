@@ -4,9 +4,7 @@ services:
     container_name: family_bot
     depends_on:
       - db
-    environment:
-      - API_TOKEN=7039079332:AAEEIunpYq1CZCO34EOBOG6R03EdApQi_2w
-
+    environment:  
       - DATABASE_URL=postgresql+asyncpg://family_bot:11235813@db:5432/family_bot
     ports:
       - "55582:55582"
